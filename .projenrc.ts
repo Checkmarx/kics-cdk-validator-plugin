@@ -20,9 +20,11 @@ const project = new JsiiProject({
   repositoryUrl: 'https://github.com/Checkmarx/kics-cdk-validator-plugin.git',
   deps: [
     'aws-cdk-lib',
+    'constructs',
   ],
   peerDeps: [
     'aws-cdk-lib',
+    'constructs',
   ],
   description: 'A KICS plugin for AWS CDK',
 });
