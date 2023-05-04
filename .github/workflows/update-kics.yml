@@ -4,7 +4,7 @@ name: update-kics
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: 0 6 * * MON
+    - cron: 0 9 * * THU
 jobs:
   update:
     runs-on: ubuntu-latest

@@ -1,9 +1,10 @@
 import { JsiiProject } from 'projen/lib/cdk';
 import { BundleKics } from './projenrc';
+import { ReleaseTrigger } from 'projen/lib/release';
 
 const project = new JsiiProject({
   author: 'Checkmarx',
-  authorAddress: 'REPLACEME@checkmarx.com',
+  authorAddress: 'kics@checkmarx.com',
   defaultReleaseBranch: 'main',
   devDeps: [
     'cdklabs-projen-project-types',
@@ -16,15 +17,14 @@ const project = new JsiiProject({
   ],
   name: 'kics-cdk-validator-plugin',
   projenrcTs: true,
-  release: false,
+  release: true,
+  releaseTrigger: ReleaseTrigger.continuous(),
   repositoryUrl: 'https://github.com/Checkmarx/kics-cdk-validator-plugin.git',
   deps: [
     'aws-cdk-lib',
-    'constructs',
   ],
   peerDeps: [
     'aws-cdk-lib',
-    'constructs',
   ],
   description: 'A KICS plugin for AWS CDK',
 });
