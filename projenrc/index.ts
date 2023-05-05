@@ -24,6 +24,9 @@ export class BundleKics extends Component {
         permissions: {
           contents: JobPermission.WRITE,
         },
+        env: {
+          'GITHUB_TOKEN': '${{ secrets.GITHUB_TOKEN }}',
+        },
         runsOn: ['ubuntu-latest'],
         steps: [
           { uses: 'actions/checkout@v3' },
