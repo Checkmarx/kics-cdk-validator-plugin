@@ -17,6 +17,7 @@ const project = new JsiiProject({
     '@types/fs-extra',
     'constructs',
     'aws-cdk-lib',
+    'goreleaser',
   ],
   name: 'kics-cdk-validator-plugin',
   projenrcTs: true,
