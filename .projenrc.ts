@@ -2,6 +2,7 @@ import { JsiiProject } from 'projen/lib/cdk';
 import { BundleKics } from './projenrc';
 import { ReleaseTrigger } from 'projen/lib/release';
 
+
 const project = new JsiiProject({
   author: 'Checkmarx',
   authorAddress: 'kics@checkmarx.com',
