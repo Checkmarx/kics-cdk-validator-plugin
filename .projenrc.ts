@@ -1,6 +1,6 @@
 import { JsiiProject } from 'projen/lib/cdk';
-import { BundleKics } from './projenrc';
 import { ReleaseTrigger } from 'projen/lib/release';
+import { BundleKics } from './projenrc';
 
 
 const project = new JsiiProject({
@@ -16,7 +16,7 @@ const project = new JsiiProject({
     'fs-extra',
     '@types/fs-extra',
     'constructs',
-    'aws-cdk-lib'
+    'aws-cdk-lib',
   ],
   name: 'kics-cdk-validator-plugin',
   projenrcTs: true,
