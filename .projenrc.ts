@@ -15,6 +15,8 @@ const project = new JsiiProject({
     '@types/mock-fs',
     'fs-extra',
     '@types/fs-extra',
+    'constructs',
+    'aws-cdk-lib'
   ],
   name: 'kics-cdk-validator-plugin',
   projenrcTs: true,

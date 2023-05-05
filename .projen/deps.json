@@ -37,7 +37,15 @@
       "type": "build"
     },
     {
+      "name": "aws-cdk-lib",
+      "type": "build"
+    },
+    {
       "name": "cdklabs-projen-project-types",
+      "type": "build"
+    },
+    {
+      "name": "constructs",
       "type": "build"
     },
     {
