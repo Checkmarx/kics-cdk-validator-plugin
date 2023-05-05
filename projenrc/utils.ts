@@ -31,12 +31,12 @@ export function getReleaseId(): number | undefined {
 }
 
 export function getOctokit(): Octo {
-  if (!process.env.PROJEN_GITHUB_TOKEN) {
+  if (!process.env.GITHUB_TOKEN) {
     throw new Error('GITHUB_TOKEN needs to be set');
   }
   return {
-    token: process.env.PROJEN_GITHUB_TOKEN,
-    octo: new Octokit({ auth: process.env.PROJEN_GITHUB_TOKEN }),
+    token: process.env.GITHUB_TOKEN,
+    octo: new Octokit({ auth: process.env.GITHUB_TOKEN }),
     owner: 'Checkmarx',
     repo: 'kics',
     headers: {
