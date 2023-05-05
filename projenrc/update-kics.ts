@@ -10,6 +10,7 @@ type Release = Endpoints['GET /repos/{owner}/{repo}/releases/latest']['response'
  */
 async function queryLatestRelease(): Promise<Release> {
   const octokit = getOctokit();
+  
   const release = await octokit.octo.request('GET /repos/{owner}/{repo}/releases/latest', {
     owner: octokit.owner,
     repo: octokit.repo,
