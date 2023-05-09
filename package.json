@@ -61,7 +61,6 @@
     "eslint-import-resolver-typescript": "^3.5.3",
     "eslint-plugin-import": "^2.27.5",
     "fs-extra": "^10.1.0",
-    "goreleaser": "*",
     "jest": "^27",
     "jest-junit": "^15",
     "jsii": "1.x",
