@@ -35,8 +35,7 @@ project.gitignore.exclude('bin');
 project.gitignore.exclude('assets');
 
 // Super hacky way to add a step to a workflow that projen itself generates
-const buildWorkflow = project.github?.workflows
-  .find(wf => wf.name === 'build');
+const buildWorkflow = project.github?. tryFindWorkflow('build');
 
 if (buildWorkflow != null) {
   const buildJob = buildWorkflow.getJob('build');
