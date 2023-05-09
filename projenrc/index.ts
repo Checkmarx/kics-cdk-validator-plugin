@@ -25,7 +25,7 @@ export class BundleKics extends Component {
           contents: JobPermission.WRITE,
         },
         env: {
-          'GITHUB_TOKEN': '${{ secrets.GITHUB_TOKEN }}',
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
         },
         runsOn: ['ubuntu-latest'],
         steps: [

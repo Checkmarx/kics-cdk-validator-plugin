@@ -1,8 +1,8 @@
 import { JsiiProject } from 'projen/lib/cdk';
+import { Job } from 'projen/lib/github/workflows-model';
 import { ReleaseTrigger } from 'projen/lib/release';
 import { BundleKics } from './projenrc';
 
-import { Job } from 'projen/lib/github/workflows-model';
 
 const project = new JsiiProject({
   author: 'Checkmarx',
@@ -48,10 +48,11 @@ if (buildWorkflow != null) {
       steps: [
         { uses: 'actions/setup-go@v3' },
         { run: 'go install github.com/goreleaser/goreleaser@latest' },
-        { name: 'Add goreleaser to PATH',
-          run: 'echo "PATH=$(go env GOPATH)/bin:$PATH" >> $GITHUB_ENV'
+        {
+          name: 'Add goreleaser to PATH',
+          run: 'echo "PATH=$(go env GOPATH)/bin:$PATH" >> $GITHUB_ENV',
         },
-        ...(buildJob.steps as any)()
+        ...(buildJob.steps as any)(),
       ],
     });
   }
