@@ -17,12 +17,15 @@ export class BundleKics extends Component {
     const workflow = project.github?.addWorkflow('update-kics');
     workflow?.on({
       workflowDispatch: {},
-      schedule: [{ cron: '0 6 * * MON' }],
+      schedule: [{ cron: '0 9 * * THU' }],
     });
     workflow?.addJobs({
       update: {
         permissions: {
           contents: JobPermission.WRITE,
+        },
+        env: {
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
         },
         runsOn: ['ubuntu-latest'],
         steps: [
@@ -59,3 +62,5 @@ export class BundleKics extends Component {
     });
   }
 }
+
+

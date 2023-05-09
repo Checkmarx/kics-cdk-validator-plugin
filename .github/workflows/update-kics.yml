@@ -4,12 +4,14 @@ name: update-kics
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: 0 6 * * MON
+    - cron: 0 9 * * THU
 jobs:
   update:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-go@v3
