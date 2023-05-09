@@ -1,6 +1,7 @@
 import { JsiiProject } from 'projen/lib/cdk';
 import { BundleKics } from './projenrc';
 import { ReleaseTrigger } from 'projen/lib/release';
+import { Job } from 'projen/lib/github/workflows-model';
 
 const project = new JsiiProject({
   author: 'Checkmarx',
