@@ -1,7 +1,8 @@
 import { JsiiProject } from 'projen/lib/cdk';
-import { BundleKics } from './projenrc';
-import { ReleaseTrigger } from 'projen/lib/release';
 import { Job } from 'projen/lib/github/workflows-model';
+import { ReleaseTrigger } from 'projen/lib/release';
+import { BundleKics } from './projenrc';
+
 
 const project = new JsiiProject({
   author: 'Checkmarx',
@@ -15,6 +16,8 @@ const project = new JsiiProject({
     '@types/mock-fs',
     'fs-extra',
     '@types/fs-extra',
+    'constructs',
+    'aws-cdk-lib',
   ],
   name: 'kics-cdk-validator-plugin',
   projenrcTs: true,
@@ -45,7 +48,11 @@ if (buildWorkflow != null) {
       steps: [
         { uses: 'actions/setup-go@v3' },
         { run: 'go install github.com/goreleaser/goreleaser@latest' },
-        ...(buildJob.steps as any)()
+        {
+          name: 'Add goreleaser to PATH',
+          run: 'echo "PATH=$(go env GOPATH)/bin:$PATH" >> $GITHUB_ENV',
+        },
+        ...(buildJob.steps as any)(),
       ],
     });
   }
