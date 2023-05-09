@@ -49,7 +49,7 @@ if (buildWorkflow != null) {
         { uses: 'actions/setup-go@v3' },
         { run: 'go install github.com/goreleaser/goreleaser@latest' },
         { name: 'Add goreleaser to PATH',
-          run: 'echo "::add-path::$(go env GOPATH)/bin"'
+          run: 'echo "PATH=$(go env GOPATH)/bin:$PATH" >> $GITHUB_ENV'
         },
         ...(buildJob.steps as any)()
       ],
