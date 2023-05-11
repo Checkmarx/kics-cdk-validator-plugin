@@ -72,7 +72,7 @@ if (releaseWorkflow != null) {
         { name: 'Add goreleaser to PATH',
           run: 'echo "PATH=$(go env GOPATH)/bin:$PATH" >> $GITHUB_ENV'
         },
-        ...(releaseJob.steps as any)()
+        ...releaseJob.steps
       ],
     });
   }
