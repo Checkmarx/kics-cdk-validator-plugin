@@ -69,7 +69,8 @@ if (releaseWorkflow != null) {
       steps: [
         { uses: 'actions/setup-go@v3' },
         { run: 'go install github.com/goreleaser/goreleaser@latest' },
-        { name: 'Add goreleaser to PATH',
+        { 
+          name: 'Add goreleaser to PATH',
           run: 'echo "PATH=$(go env GOPATH)/bin:$PATH" >> $GITHUB_ENV'
         },
         ...releaseJob.steps
