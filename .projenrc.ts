@@ -57,6 +57,26 @@ if (buildWorkflow != null) {
   }
 }
 
+// Super hacky way to add a step to a workflow that projen itself generates
+const releaseWorkflow = project.github?. tryFindWorkflow('release');
+
+if (releaseWorkflow != null) {
+  const releaseJob = releaseWorkflow.getJob('release');
+  if (isJob(releaseJob)) {
+    releaseWorkflow.updateJob('release', {
+      ...releaseJob,
+      steps: [
+        { uses: 'actions/setup-go@v3' },
+        { run: 'go install github.com/goreleaser/goreleaser@latest' },
+        { name: 'Add goreleaser to PATH',
+          run: 'echo "PATH=$(go env GOPATH)/bin:$PATH" >> $GITHUB_ENV'
+        },
+        ...(releaseJob.steps as any)()
+      ],
+    });
+  }
+}
+
 new BundleKics(project);
 project.synth();
 
