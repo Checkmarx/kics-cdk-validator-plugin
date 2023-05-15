@@ -4,12 +4,12 @@
 
 ## Classes <a name="Classes" id="Classes"></a>
 
-### Hello <a name="Hello" id="kics-cdk-validator-plugin.Hello"></a>
+### Hello <a name="Hello" id="@checkmarx/cdk-validator-kics.Hello"></a>
 
-#### Initializers <a name="Initializers" id="kics-cdk-validator-plugin.Hello.Initializer"></a>
+#### Initializers <a name="Initializers" id="@checkmarx/cdk-validator-kics.Hello.Initializer"></a>
 
 ```typescript
-import { Hello } from 'kics-cdk-validator-plugin'
+import { Hello } from '@checkmarx/cdk-validator-kics'
 
 new Hello()
 ```
@@ -23,11 +23,11 @@ new Hello()
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#kics-cdk-validator-plugin.Hello.sayHello">sayHello</a></code> | *No description.* |
+| <code><a href="#@checkmarx/cdk-validator-kics.Hello.sayHello">sayHello</a></code> | *No description.* |
 
 ---
 
-##### `sayHello` <a name="sayHello" id="kics-cdk-validator-plugin.Hello.sayHello"></a>
+##### `sayHello` <a name="sayHello" id="@checkmarx/cdk-validator-kics.Hello.sayHello"></a>
 
 ```typescript
 public sayHello(): string
