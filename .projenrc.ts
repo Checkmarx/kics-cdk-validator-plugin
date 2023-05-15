@@ -19,7 +19,7 @@ const project = new JsiiProject({
     'constructs',
     'aws-cdk-lib',
   ],
-  name: 'kics-cdk-validator-plugin',
+  name: '@checkmarx/cdk-validator-kics',
   projenrcTs: true,
   release: true,
   releaseTrigger: ReleaseTrigger.continuous(),
