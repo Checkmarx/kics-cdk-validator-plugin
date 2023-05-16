@@ -19,7 +19,7 @@ const project = new JsiiProject({
     'constructs',
     'aws-cdk-lib',
   ],
-  name: 'kics-cdk-validator-plugin',
+  name: '@checkmarx/cdk-validator-kics',
   projenrcTs: true,
   release: true,
   releaseTrigger: ReleaseTrigger.continuous(),
@@ -53,6 +53,27 @@ if (buildWorkflow != null) {
           run: 'echo "PATH=$(go env GOPATH)/bin:$PATH" >> $GITHUB_ENV',
         },
         ...(buildJob.steps as any)(),
+      ],
+    });
+  }
+}
+
+// Super hacky way to add a step to a workflow that projen itself generates
+const releaseWorkflow = project.github?. tryFindWorkflow('release');
+
+if (releaseWorkflow != null) {
+  const releaseJob = releaseWorkflow.getJob('release');
+  if (isJob(releaseJob)) {
+    releaseWorkflow.updateJob('release', {
+      ...releaseJob,
+      steps: [
+        { uses: 'actions/setup-go@v3' },
+        { run: 'go install github.com/goreleaser/goreleaser@latest' },
+        {
+          name: 'Add goreleaser to PATH',
+          run: 'echo "PATH=$(go env GOPATH)/bin:$PATH" >> $GITHUB_ENV',
+        },
+        ...releaseJob.steps,
       ],
     });
   }

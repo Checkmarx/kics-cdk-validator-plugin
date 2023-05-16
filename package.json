@@ -1,5 +1,5 @@
 {
-  "name": "kics-cdk-validator-plugin",
+  "name": "@checkmarx/cdk-validator-kics",
   "description": "A KICS plugin for AWS CDK",
   "repository": {
     "type": "git",
