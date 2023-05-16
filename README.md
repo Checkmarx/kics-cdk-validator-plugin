@@ -21,36 +21,7 @@
 ### TypeScript/JavaScript
 
 ```bash
-npm install cdk-validator-kics
-```
-
-### Python
-
-```bash
-pip install cdk-validator-kics
-```
-
-### Java
-
-```xml
-// add this to your pom.xml
-<dependency>
-    <groupId>io.github.cdklabs</groupId>
-    <artifactId>cdk-validator-kics</artifactId>
-    <version>0.0.0</version> // replace with version
-</dependency>
-```
-
-### .NET
-
-```bash
-dotnet add package CdklabsCdkValidatorKics --version X.X.X
-```
-
-### Go
-
-```bash
-go get cdk-validator-kics-go
+npm install @checkmarx/cdk-validator-kics
 ```
 
 ## Usage
