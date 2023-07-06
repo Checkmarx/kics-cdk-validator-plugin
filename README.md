@@ -29,6 +29,10 @@ npm install @checkmarx/cdk-validator-kics
 To use this plugin in your CDK application add it to the CDK App.
 
 ```ts
+import { KicsValidator } from '@checkmarx/cdk-validator-kics/lib/plugin';
+```
+
+```ts
 new App({
   validationPlugins: [
     new KicsValidator(),
