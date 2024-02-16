@@ -14,9 +14,10 @@ beforeEach(() => {
 describe('KicsValidator', () => {
   test('synth fails', () => {
     // GIVEN
+    const validator = new KicsValidator();
     const app = new App({
       policyValidationBeta1: [
-        new KicsValidator(),
+        validator,
       ],
       context: {
         '@aws-cdk/core:validationReportJson': true,
@@ -27,10 +28,27 @@ describe('KicsValidator', () => {
     const stack = new Stack(app, 'Stack');
     new s3.Bucket(stack, 'Bucket');
 
+    expect(validator.recentValidations).toBeUndefined();
+
     // THEN
+    // now synth wont fail
     expect(() => {
       app.synth();
-    }).toThrow();
+    }).not.toThrow();
+
+    let ruleNames : string[] = [];
+
+    validator.recentValidations?.forEach((v) => {
+      ruleNames.push(v.ruleName);
+    });
+
+    expect(ruleNames).toEqual(expect.arrayContaining([
+      'S3 Bucket Without SSL In Write Actions',
+      'S3 Bucket Without Server-side-encryption',
+      'S3 Bucket Should Have Bucket Policy',
+      'IAM Access Analyzer Not Enabled',
+    ]));
+
     const report = fs.readFileSync(path.join(app.outdir, 'policy-validation-report.json')).toString('utf-8').trim();
     const jsonReport = JSON.parse(report);
     const rules = jsonReport.pluginReports.flatMap((r: any) => r.violations.flatMap((v: any) => v.ruleName));

@@ -60,6 +60,9 @@ export class KicsValidator implements IPolicyValidationPluginBeta1 {
   private readonly excludeCategories?: string[];
   private readonly excludeSeverities?: string[];
   private readonly failureSeverities: string[];
+  public readonly queryResults?: string[];
+  public recentValidations?: PolicyViolationBeta1[];
+
 
   constructor(props: KicsValidatorProps = {}) {
     this.name = 'kics-cdk-validator-plugin';
@@ -103,7 +106,7 @@ export class KicsValidator implements IPolicyValidationPluginBeta1 {
       output.queries.forEach((query) => {
         if (success ) {
           success = !this.failureSeverities.some((value) => value.toUpperCase() === query.severity.toUpperCase());
-        }        
+        }
         violations.push({
           fix: query.query_url,
           ruleName: query.query_name,
@@ -125,6 +128,7 @@ export class KicsValidator implements IPolicyValidationPluginBeta1 {
       success = false;
       console.error(e);
     }
+    this.recentValidations = violations;
     return {
       violations,
       success,

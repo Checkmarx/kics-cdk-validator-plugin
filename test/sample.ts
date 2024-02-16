@@ -3,9 +3,9 @@ import * as s3 from 'aws-cdk-lib/aws-s3';
 import { KicsValidator } from '../src/plugin';
 
 const app = new App({
-    policyValidationBeta1: [
-        new KicsValidator(),
-    ]
+  policyValidationBeta1: [
+    new KicsValidator(),
+  ],
 });
 
 const stack = new Stack(app, 'Stack');
