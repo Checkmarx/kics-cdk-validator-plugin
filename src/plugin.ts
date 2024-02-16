@@ -71,6 +71,7 @@ export class KicsValidator implements IPolicyValidationPluginBeta1 {
     this.excludeSeverities = props.excludeSeverities;
     this.failureSeverities = props.failureSeverities ?? [Severity.HIGH, Severity.MEDIUM];
 
+
     this.kics = path.join(__dirname, '..', 'bin', `${platform}_${arch}`, platform.toString() === 'windows' ? 'kics.exe' : 'kics');
   }
 
@@ -100,7 +101,9 @@ export class KicsValidator implements IPolicyValidationPluginBeta1 {
       const output: KicsSchema = JSON.parse(results);
 
       output.queries.forEach((query) => {
-        success = !this.failureSeverities.some((value) => value.toUpperCase() === query.severity.toUpperCase());
+        if (success ) {
+          success = !this.failureSeverities.some((value) => value.toUpperCase() === query.severity.toUpperCase());
+        }        
         violations.push({
           fix: query.query_url,
           ruleName: query.query_name,

@@ -72,6 +72,7 @@ function buildKics(dir: string) {
  */
 export async function main() {
   const version = getReleaseVersion();
+  console.log(`Kics version: ${version}`);
   if (!fs.existsSync(path.join(__dirname, '..', 'bin')) && version) {
     const downloadPath = cloneVersion(version);
     if (downloadPath) {
@@ -80,6 +81,7 @@ export async function main() {
   }
 }
 
+console.log('Running bundle-kics');
 main().catch(e => {
   console.log(e);
 });
