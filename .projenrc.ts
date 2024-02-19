@@ -31,6 +31,7 @@ const project = new JsiiProject({
     'aws-cdk-lib',
   ],
   description: 'A KICS plugin for AWS CDK',
+  majorVersion: 1
 });
 
 project.tsconfig?.addInclude('projenrc/**/*.ts');
