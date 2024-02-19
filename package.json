@@ -5,14 +5,6 @@
     "type": "git",
     "url": "https://github.com/Checkmarx/kics-cdk-validator-plugin.git"
   },
-  "bin": {
-    "darwin_amd64": "bin/darwin_amd64",
-    "darwin_arm64": "bin/darwin_arm64",
-    "linux_amd64": "bin/linux_amd64",
-    "linux_arm64": "bin/linux_arm64",
-    "windows_amd64": "bin/windows_amd64",
-    "windows_arm64": "bin/windows_arm64"
-  },
   "scripts": {
     "build": "npx projen build",
     "bump": "npx projen bump",
