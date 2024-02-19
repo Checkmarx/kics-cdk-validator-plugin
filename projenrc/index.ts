@@ -30,7 +30,10 @@ export class BundleKics extends Component {
         runsOn: ['ubuntu-latest'],
         steps: [
           { uses: 'actions/checkout@v3' },
-          { uses: 'actions/setup-go@v3' },
+          {
+            uses: 'actions/setup-go@v5',
+            with: { 'go-version': '1.22.x' },
+          },
           { run: 'yarn install' },
           { run: 'go install github.com/goreleaser/goreleaser@latest' },
           { run: this.project.runTaskCommand(updateTask) },

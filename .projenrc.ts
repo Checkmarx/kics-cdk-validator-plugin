@@ -46,7 +46,10 @@ if (buildWorkflow != null) {
     buildWorkflow.updateJob('build', {
       ...buildJob,
       steps: [
-        { uses: 'actions/setup-go@v3' },
+        {
+          uses: 'actions/setup-go@v5',
+          with: { 'go-version': '1.22.x' },
+        },
         { run: 'go install github.com/goreleaser/goreleaser@latest' },
         {
           name: 'Add goreleaser to PATH',
@@ -67,7 +70,10 @@ if (releaseWorkflow != null) {
     releaseWorkflow.updateJob('release', {
       ...releaseJob,
       steps: [
-        { uses: 'actions/setup-go@v3' },
+        {
+          uses: 'actions/setup-go@v5',
+          with: { 'go-version': '1.22.x' },
+        },
         { run: 'go install github.com/goreleaser/goreleaser@latest' },
         {
           name: 'Add goreleaser to PATH',
