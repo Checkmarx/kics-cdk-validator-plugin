@@ -64,7 +64,6 @@ describe('KicsPlugin', () => {
         plugin.Severity.TRACE,
       ],
       failureSeverities: [
-        plugin.Severity.CRITICAL,
         plugin.Severity.HIGH,
         plugin.Severity.INFO,
       ],
