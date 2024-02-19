@@ -73,7 +73,6 @@ describe('KicsValidator', () => {
           ],
           excludeSeverities: [
             Severity.MEDIUM,
-            Severity.CRITICAL,
           ],
         }),
       ],
