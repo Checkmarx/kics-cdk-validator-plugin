@@ -42,6 +42,7 @@ describe('KicsPlugin', () => {
       '--path', 'template-path-2',
       '--output-path', expect.any(String),
       '--output-name', expect.stringMatching(/.*kics-cdk-validator-plugin/),
+      '--fail-on', 'critical',
       '--fail-on', 'high',
       '--fail-on', 'medium',
       '--ci',
