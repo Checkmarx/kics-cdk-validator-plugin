@@ -45,7 +45,7 @@ export interface KicsValidatorProps {
    * List of severities which should cause the
    * execution to fail
    *
-   * @default [Severity.HIGH, Severity.MEDIUM]
+   * @default [Severity.CRITICAL, Severity.HIGH, Severity.MEDIUM]
    */
   readonly failureSeverities?: Severity[];
 }
@@ -72,7 +72,7 @@ export class KicsValidator implements IPolicyValidationPluginBeta1 {
     this.excludeQueries = props.excludeQueries;
     this.excludeCategories = props.excludeCategories;
     this.excludeSeverities = props.excludeSeverities;
-    this.failureSeverities = props.failureSeverities ?? [Severity.HIGH, Severity.MEDIUM];
+    this.failureSeverities = props.failureSeverities ?? [Severity.CRITICAL, Severity.HIGH, Severity.MEDIUM];
 
 
     this.kics = path.join(__dirname, '..', 'bin', `${platform}_${arch}`, platform.toString() === 'windows' ? 'kics.exe' : 'kics');
