@@ -64,6 +64,7 @@ describe('KicsPlugin', () => {
         plugin.Severity.TRACE,
       ],
       failureSeverities: [
+        plugin.Severity.CRITICAL,
         plugin.Severity.HIGH,
         plugin.Severity.INFO,
       ],
@@ -241,6 +242,28 @@ function getKicsResult(): KicsSchema {
         query_name: 'some query',
         query_url: 'https://example.com',
         severity: plugin.Severity.HIGH,
+      },
+      {
+        category: plugin.QueryCategory.ENCRYPTION,
+        query_id: 'bcdefgh',
+        description: 'Some description',
+        files: [
+          {
+            actual_value: 'actual value',
+            expected_value: 'expected value',
+            file_name: 'sometemplate.json',
+            issue_type: 'IncorrectValue',
+            line: 9,
+            resource_name: 'BucketAAAAB',
+            resource_type: 'AWS::S3::Bucket',
+            search_key: 'Resources.BucketAAAAA.Properties',
+            search_line: 0,
+            search_value: '',
+          },
+        ],
+        query_name: 'some query',
+        query_url: 'https://example.com',
+        severity: plugin.Severity.CRITICAL,
       },
     ],
   };
