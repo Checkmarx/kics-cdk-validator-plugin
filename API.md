@@ -34,7 +34,7 @@ import { KicsValidator } from '@checkmarx/cdk-validator-kics/lib/plugin';
 
 ```ts
 new App({
-  validationPlugins: [
+  policyValidationBeta1: [
     new KicsValidator(),
   ],
 });
@@ -130,8 +130,3 @@ new Hello()
 ```typescript
 public sayHello(): string
 ```
-
-
-
-
-
