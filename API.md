@@ -91,6 +91,7 @@ By default this is set to `[Severity.HIGH, Severity.MEDIUM]`.
 new KicsValidator({
   failureSeverities: [
     Severity.HIGH,
+    Severity.MEDIUM
   ],
 });
 ```
