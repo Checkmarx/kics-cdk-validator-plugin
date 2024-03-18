@@ -94,3 +94,4 @@ new KicsValidator({
   ],
 });
 ```
+
