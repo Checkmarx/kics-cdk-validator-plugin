@@ -45,7 +45,7 @@ export interface KicsValidatorProps {
    * List of severities which should cause the
    * execution to fail
    *
-   * @default [Severity.Critical, Severity.HIGH, Severity.MEDIUM]
+   * @default [Severity.CRITICAL, Severity.HIGH, Severity.MEDIUM]
    */
   readonly failureSeverities?: Severity[];
 }
