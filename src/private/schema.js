@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QueryCategory = exports.Severity = void 0;
 var Severity;
 (function (Severity) {
+    Severity["CRITICAL"] = "critical";
     Severity["HIGH"] = "high";
     Severity["MEDIUM"] = "medium";
     Severity["LOW"] = "low";
