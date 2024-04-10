@@ -82,7 +82,6 @@ const buildWorkflow = project.github?. tryFindWorkflow('build');
 if (buildWorkflow != null) {
   const buildJob = buildWorkflow.getJob('build');
   if (isJob(buildJob)) {
-    buildWorkflow.addJob('secchecks', { ...jobConfig });
     buildWorkflow.updateJob('build', {
       ...buildJob,
       steps: [
@@ -123,6 +122,15 @@ if (releaseWorkflow != null) {
       ],
     });
   }
+}
+
+const secChecksWorkflow = project.github?.workflows.find((wf) => wf.name === 'sec-checks');
+console.log(project.github?.tryFindWorkflow('sec-checks'));
+if (secChecksWorkflow != null) {
+  secChecksWorkflow.addJob('secchecks', { ...jobConfig }); // for job config: https://github.com/projen/projen/blob/65b4194c163f47ba4842981b0c92dbe516be787b/src/github/workflows-model.ts#L6
+} else {
+  const wfXpto = project.github?.addWorkflow('sec-checks');
+  wfXpto?.addJob('secchecks', { ...jobConfig });
 }
 
 new BundleKics(project);
