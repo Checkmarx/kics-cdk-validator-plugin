@@ -51,5 +51,6 @@ tsconfig.json
 !/API.md
 bin
 assets
+!/.github/workflows/sec-checks.yml
 !/.github/workflows/update-kics.yml
 !/.projenrc.ts
