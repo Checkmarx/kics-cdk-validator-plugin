@@ -113,9 +113,9 @@ export class SecChecks extends Component {
     if (secChecksWorkflow != null) {
       secChecksWorkflow.addJob('trivy-file-system', { ...secChecksAction });
     } else {
-      const wfXpto = project.github?.addWorkflow('sec-checks');
-      wfXpto?.addJob('trivy-file-system', { ...secChecksAction });
-      wfXpto?.on({
+      const workflow = project.github?.addWorkflow('sec-checks');
+      workflow?.addJob('trivy-file-system', { ...secChecksAction });
+      workflow?.on({
         push: { branches: ['main'] },
         pullRequest: {},
       });
