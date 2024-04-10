@@ -286,7 +286,7 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@octokit/rest,@octokit/types,@types/fs-extra,@types/mock-fs,aws-cdk-lib,cdklabs-projen-project-types,eslint-import-resolver-typescript,eslint-plugin-import,fs-extra,jsii-diff,jsii-docgen,jsii-pacmak,jsii-rosetta,jsii,mock-fs,projen,ts-node,typescript"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@octokit/rest,@octokit/types,@types/fs-extra,@types/mock-fs,aws-cdk-lib,cdklabs-projen-project-types,eslint-import-resolver-typescript,eslint-plugin-import,fs-extra,jsii-diff,jsii-docgen,jsii-pacmak,mock-fs,projen,ts-node,typescript"
         },
         {
           "exec": "yarn install --check-files"
