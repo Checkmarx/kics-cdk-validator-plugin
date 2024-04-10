@@ -38,6 +38,44 @@ project.tsconfig?.addInclude('projenrc/**/*.ts');
 project.gitignore.exclude('bin');
 project.gitignore.exclude('assets');
 
+const securityChecksJob = {
+  name: 'Trivy Scan',
+  runsOn: 'ubuntu-20.04',
+  steps: [
+    {
+      name: 'Checkout code',
+      uses: 'actions/checkout@v4',
+    },
+    {
+      name: 'Run Trivy vulnerability scanner in repo mode',
+      uses: 'aquasecurity/trivy-action@master',
+      with: {
+        'scan-type': 'fs',
+        'ignore-unfixed': true,
+        'format': 'json',
+        'output': './trivy-results.json',
+        'severity': 'CRITICAL,HIGH,MEDIUM',
+        'exit-code': '1',
+      },
+    },
+    {
+      name: 'Inspect action report',
+      if: 'always()',
+      shell: 'bash',
+      run: 'cat ./trivy-results.json',
+    },
+    {
+      if: 'always()',
+      name: 'Upload artifact',
+      uses: 'actions/upload-artifact@v2',
+      with: {
+        name: 'trivy code report',
+        path: './trivy-results.json',
+      },
+    },
+  ],
+};
+
 // Super hacky way to add a step to a workflow that projen itself generates
 const buildWorkflow = project.github?. tryFindWorkflow('build');
 
@@ -56,6 +94,7 @@ if (buildWorkflow != null) {
           name: 'Add goreleaser to PATH',
           run: 'echo "PATH=$(go env GOPATH)/bin:$PATH" >> $GITHUB_ENV',
         },
+        securityChecksJob,
         ...(buildJob.steps as any)(),
       ],
     });
