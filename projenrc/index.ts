@@ -66,4 +66,59 @@ export class BundleKics extends Component {
   }
 }
 
+export class SecChecks extends Component {
+  constructor(project: JsiiProject) {
+    super(project);
 
+    const secChecksAction = {
+      name: 'Trivy Scan',
+      runsOn: ['ubuntu-20.04'],
+      permissions: {},
+      steps: [
+        {
+          name: 'Checkout code',
+          uses: 'actions/checkout@v4',
+        },
+        {
+          name: 'Run Trivy vulnerability scanner in repo mode',
+          uses: 'aquasecurity/trivy-action@master',
+          with: {
+            'scan-type': 'fs',
+            'ignore-unfixed': true,
+            'format': 'json',
+            'output': './trivy-results.json',
+            'severity': 'CRITICAL,HIGH,MEDIUM',
+            'exit-code': '1',
+          },
+        },
+        {
+          name: 'Inspect action report',
+          if: 'always()',
+          shell: 'bash',
+          run: 'cat ./trivy-results.json',
+        },
+        {
+          if: 'always()',
+          name: 'Upload artifact',
+          uses: 'actions/upload-artifact@v2',
+          with: {
+            name: 'trivy code report',
+            path: './trivy-results.json',
+          },
+        },
+      ],
+    };
+
+    const secChecksWorkflow = project.github?.tryFindWorkflow('sec-checks');
+    if (secChecksWorkflow != null) {
+      secChecksWorkflow.addJob('trivy-file-system', { ...secChecksAction });
+    } else {
+      const wfXpto = project.github?.addWorkflow('sec-checks');
+      wfXpto?.addJob('trivy-file-system', { ...secChecksAction });
+      wfXpto?.on({
+        push: { branches: ['main'] },
+        pullRequest: {},
+      });
+    }
+  }
+}
