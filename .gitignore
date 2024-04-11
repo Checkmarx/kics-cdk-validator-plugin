@@ -52,5 +52,5 @@ tsconfig.json
 bin
 assets
 !/.github/workflows/update-kics.yml
-!/.github/workflows/sec-checks.yml
+!/.github/workflows/security-checks.yml
 !/.projenrc.ts
