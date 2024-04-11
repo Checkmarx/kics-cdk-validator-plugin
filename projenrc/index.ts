@@ -90,8 +90,8 @@ export class SecurityChecks extends Component {
       permissions: {},
       steps: this.createScanSteps('Grype', 'anchore/scan-action@v3', {
         'path': '.',
-        'only-fixe': false,
-        'foutput-format': 'json',
+        'only-fixed': false,
+        'output-format': 'json',
         'severity-cutoff': 'medium',
         'fail-build': true,
       }),
