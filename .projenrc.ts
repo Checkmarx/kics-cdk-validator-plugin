@@ -1,7 +1,7 @@
 import { JsiiProject } from 'projen/lib/cdk';
 import { Job } from 'projen/lib/github/workflows-model';
 import { ReleaseTrigger } from 'projen/lib/release';
-import { BundleKics, SecChecks } from './projenrc';
+import { BundleKics, SecurityChecks } from './projenrc';
 
 
 const project = new JsiiProject({
@@ -87,7 +87,7 @@ if (releaseWorkflow != null) {
 }
 
 new BundleKics(project);
-new SecChecks(project);
+new SecurityChecks(project);
 project.synth();
 
 function isJob(job: any): job is Job {
