@@ -129,7 +129,7 @@ export class SecurityChecks extends Component {
   }
 
   private addSecurityChecksWorkflow(project: JsiiProject, trivyScan: any, grypeScan: any) {
-    const securityChecksWorkflow = project.github?.tryFindWorkflow('security-checks');
+    const securityChecksWorkflow = project.github?.tryFindWorkflow('sec-checks');
     const jobsToAdd = {
       'trivy-file-system': trivyScan,
       'grype-file-system': grypeScan,
@@ -138,7 +138,7 @@ export class SecurityChecks extends Component {
     if (securityChecksWorkflow != null) {
       securityChecksWorkflow.addJobs(jobsToAdd);
     } else {
-      const workflow = project.github?.addWorkflow('security-checks');
+      const workflow = project.github?.addWorkflow('sec-checks');
       workflow?.addJobs(jobsToAdd);
       workflow?.on({
         push: { branches: ['main'] },
