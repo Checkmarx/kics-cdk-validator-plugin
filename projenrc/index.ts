@@ -79,7 +79,7 @@ export class SecurityChecks extends Component {
         'ignore-unfixed': true,
         'format': 'json',
         'output': './results.json',
-        'severity': 'CRITICAL,HIGH,MEDIUM',
+        'severity': 'CRITICAL,HIGH,MEDIUM,LOW',
         'exit-code': '1',
       }),
     };
@@ -92,7 +92,7 @@ export class SecurityChecks extends Component {
         'path': '.',
         'only-fixed': false,
         'output-format': 'json',
-        'severity-cutoff': 'medium',
+        'severity-cutoff': 'low',
         'fail-build': true,
       }),
     };
