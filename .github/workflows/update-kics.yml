@@ -20,7 +20,7 @@ jobs:
       - run: yarn install
       - run: go install github.com/goreleaser/goreleaser@latest
       - run: npx projen update-kics
-      - uses: peter-evans/create-pull-request@v5
+      - uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.PROJEN_GITHUB_TOKEN }}
           title: "feat: update kics version"
