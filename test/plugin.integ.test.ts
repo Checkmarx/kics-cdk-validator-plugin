@@ -26,7 +26,10 @@ describe('KicsValidator', () => {
 
     // WHEN
     const stack = new Stack(app, 'Stack');
-    new s3.Bucket(stack, 'Bucket');
+    new s3.Bucket(stack, 'Bucket', {
+      publicReadAccess: true
+    });
+
 
     expect(validator.recentValidations).toBeUndefined();
 
@@ -45,7 +48,7 @@ describe('KicsValidator', () => {
     expect(ruleNames).toEqual(expect.arrayContaining([
       'S3 Bucket Without SSL In Write Actions',
       'S3 Bucket Without Server-side-encryption',
-      'S3 Bucket Should Have Bucket Policy',
+      'S3 Bucket Access to Any Principal',
       'IAM Access Analyzer Not Enabled',
     ]));
 
@@ -55,8 +58,11 @@ describe('KicsValidator', () => {
     expect(rules).toEqual(expect.arrayContaining([
       'S3 Bucket Without SSL In Write Actions',
       'S3 Bucket Without Server-side-encryption',
-      'S3 Bucket Should Have Bucket Policy',
+      'S3 Bucket Access to Any Principal',
     ]));
+
+    const severities = jsonReport.pluginReports.flatMap((r: any) => r.violations.flatMap((v: any) => v.severity));
+    expect(severities).toContain(Severity.CRITICAL.toUpperCase());
   });
   test('synth succeeds', () => {
     // GIVEN
