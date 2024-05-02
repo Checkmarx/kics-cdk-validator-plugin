@@ -27,7 +27,7 @@ describe('KicsValidator', () => {
     // WHEN
     const stack = new Stack(app, 'Stack');
     new s3.Bucket(stack, 'Bucket', {
-      publicReadAccess: true
+      publicReadAccess: true,
     });
 
 

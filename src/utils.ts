@@ -13,7 +13,7 @@ export function exec(commandLine: string[], options: { cwd?: string; json?: bool
   });
 
   if (proc.error) { throw proc.error; }
-  if (proc.status !== 0  && proc.status !== 60) {
+  if (proc.status !== 0 && proc.status !== 60) {
     if (process.stderr) { // will be 'null' in verbose mode
       process.stderr.write(proc.stderr);
     }
