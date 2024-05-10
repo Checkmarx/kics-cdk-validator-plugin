@@ -66,7 +66,7 @@ new KicsValidator({
 
 ### Severity
 
-Kics queries can fall under 5 different severities, `high`, `medium`, `low`,
+Kics queries can fall under 6 different severities, `critical`, `high`, `medium`, `low`,
 `info`, and `trace`. This plugin allows you to configure how the severities are
 handled.
 
@@ -83,14 +83,18 @@ new KicsValidator({
 });
 ```
 
-The other option is to provide `failureSeverities` if you still want to show
-the query in the results, but you don't want it to fail the execution.
-By default this is set to `[Severity.HIGH, Severity.MEDIUM]`.
+Alternatively, you can use the `failureSeverities` parameter when initiating a scan, enabling you to precisely define the criteria for considering a scan unsuccessful based on the severity of its results. Any result with a severity lower than the specified ones will not prompt a failure.
+
+Please note that scans configured to only fail on certain severity levels might not display results falling below those specified levels.
+
+By default this is set to `[Severity.CRITICAL, Severity.HIGH, Severity.MEDIUM]`.
 
 ```ts
 new KicsValidator({
   failureSeverities: [
+    Severity.CRITICAL,
     Severity.HIGH,
+    Severity.MEDIUM,
   ],
 });
 ```
