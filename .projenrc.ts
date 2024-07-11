@@ -1,7 +1,7 @@
 import { JsiiProject } from 'projen/lib/cdk';
 import { Job } from 'projen/lib/github/workflows-model';
 import { ReleaseTrigger } from 'projen/lib/release';
-import { BundleKics } from './projenrc';
+import { BundleKics, SecurityChecks } from './projenrc';
 
 
 const project = new JsiiProject({
@@ -39,7 +39,7 @@ project.gitignore.exclude('bin');
 project.gitignore.exclude('assets');
 
 // Super hacky way to add a step to a workflow that projen itself generates
-const buildWorkflow = project.github?. tryFindWorkflow('build');
+const buildWorkflow = project.github?.tryFindWorkflow('build');
 
 if (buildWorkflow != null) {
   const buildJob = buildWorkflow.getJob('build');
@@ -63,7 +63,7 @@ if (buildWorkflow != null) {
 }
 
 // Super hacky way to add a step to a workflow that projen itself generates
-const releaseWorkflow = project.github?. tryFindWorkflow('release');
+const releaseWorkflow = project.github?.tryFindWorkflow('release');
 
 if (releaseWorkflow != null) {
   const releaseJob = releaseWorkflow.getJob('release');
@@ -87,6 +87,7 @@ if (releaseWorkflow != null) {
 }
 
 new BundleKics(project);
+new SecurityChecks(project);
 project.synth();
 
 function isJob(job: any): job is Job {

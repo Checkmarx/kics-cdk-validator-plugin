@@ -66,4 +66,84 @@ export class BundleKics extends Component {
   }
 }
 
+export class SecurityChecks extends Component {
+  constructor(project: JsiiProject) {
+    super(project);
 
+    const trivyScan = {
+      name: 'Trivy Scan',
+      runsOn: ['ubuntu-latest'],
+      permissions: {},
+      steps: this.createScanSteps('Trivy', 'aquasecurity/trivy-action@master', {
+        'scan-type': 'fs',
+        'ignore-unfixed': true,
+        'format': 'json',
+        'output': './results.json',
+        'severity': 'CRITICAL,HIGH,MEDIUM,LOW',
+        'exit-code': '1',
+      }),
+    };
+
+    const grypeScan = {
+      name: 'Grype Scan',
+      runsOn: ['ubuntu-latest'],
+      permissions: {},
+      steps: this.createScanSteps('Grype', 'anchore/scan-action@v3', {
+        'path': '.',
+        'only-fixed': false,
+        'output-format': 'json',
+        'severity-cutoff': 'low',
+        'fail-build': true,
+      }),
+    };
+
+    this.addSecurityChecksWorkflow(project, trivyScan, grypeScan);
+  }
+
+  private createScanSteps(scannerName: string, scannerAction: string, options: any) {
+    return [
+      {
+        name: 'Checkout code',
+        uses: 'actions/checkout@v4',
+      },
+      {
+        name: `Run ${scannerName} vulnerability scanner in repo mode`,
+        uses: scannerAction,
+        with: options,
+      },
+      {
+        name: 'Inspect action report',
+        if: 'always()',
+        run: 'cat ./results.json',
+      },
+      {
+        name: 'Upload artifact',
+        if: 'always()',
+        uses: 'actions/upload-artifact@v4',
+        with: {
+          name: `${scannerName.toLowerCase()}-scan-report`,
+          path: './results.json',
+        },
+      },
+    ];
+  }
+
+  private addSecurityChecksWorkflow(project: JsiiProject, trivyScan: any, grypeScan: any) {
+    const securityChecksWorkflow = project.github?.tryFindWorkflow('sec-checks');
+    const jobsToAdd = {
+      'trivy-file-system': trivyScan,
+      'grype-file-system': grypeScan,
+    };
+
+    if (securityChecksWorkflow != null) {
+      securityChecksWorkflow.addJobs(jobsToAdd);
+    } else {
+      const workflow = project.github?.addWorkflow('sec-checks');
+      workflow?.addJobs(jobsToAdd);
+      workflow?.on({
+        push: { branches: ['main'] },
+        pullRequest: {},
+      });
+    }
+  }
+}
