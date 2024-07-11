@@ -28,6 +28,12 @@ describe('KicsValidator', () => {
     const stack = new Stack(app, 'Stack');
     new s3.Bucket(stack, 'Bucket', {
       publicReadAccess: true,
+      blockPublicAccess: {
+        blockPublicAcls: false,
+        blockPublicPolicy: false,
+        ignorePublicAcls: false,
+        restrictPublicBuckets: false,
+      },
     });
 
 
