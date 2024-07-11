@@ -33,7 +33,7 @@ describe('KicsValidator', () => {
         blockPublicPolicy: false,
         ignorePublicAcls: false,
         restrictPublicBuckets: false,
-      }
+      },
     });
 
 
